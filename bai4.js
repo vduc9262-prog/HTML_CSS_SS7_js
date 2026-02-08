@@ -51,7 +51,9 @@ function countPlayerByPosition(players) {
 
 function hasGoalkeeper() {
     for (let i = 0; i < players.length; i++) {
+
         const phan = players[i].split("-");
+
         if (phan[2] === "Thủ môn") {
             return true;
         }
@@ -62,7 +64,3 @@ function hasGoalkeeper() {
 printTeamRoster();
 
 countPlayerByPosition(players);
-
-const coThuMon = hasGoalkeeper();
-
-alert("Đội bóng " + (coThuMon ? "CÓ" : "KHÔNG CÓ") + " thủ môn.");
