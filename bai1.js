@@ -1,111 +1,32 @@
-const playerIds = [];
+let playerID = [];
 
-const playerPositions = [];
+let PoiPlayyer = [];
 
-const positionNames = [, "Thủ môn", "Hậu vệ", "Tiền vệ", "Tiền đạo"];
-
-function isIdExists(id) {
-    for (let i = 0; i < playerIds.length; i++) {
-        if (playerIds[i] === id) {
-            return true;
-        }
-    }
-    return false;
-}
-
-
-function inputPlayers(count) {
-    for (let i = 0; i < count; i++) {
-        alert("Nhập thông tin cầu thủ thứ " + (i + 1));
-
-        let id;
-
-        do {
-            id = prompt("Nhập mã cầu thủ");
-            if (id === null || id.trim() === "") {
-                alert(" Mã không được để trống ");
-                continue;
-            }
-            if (isIdExists(id)) {
-                alert("Mã đã tồn tại . Nhập mã khác!");
-            }
-        } while (isIdExists(id) || id === null || id.trim() === "");
-
-
-        let chosenPosition;
-        do {
-            chosenPosition = prompt("Chọn vị trí: 1Thủ môn - 2Hậu vệ - 3Tiền vệ  - 4Tiền đạo ");
-            if (chosenPosition !== "1" && chosenPosition !== "2" && chosenPosition !== "3" && chosenPosition !== "4") {
-                alert("Chỉ nhập số từ 1 đến 4");
-            }
-        } while (chosenPosition !== "1" && chosenPosition !== "2" && chosenPosition !== "3" && chosenPosition !== "4");
-
-
-        playerIds.push(id);
-        playerPositions.push(positionNames[Number(chosenPosition)]);
-    }
-}
-
-function printTeamRoster() {
-    let listText = "DANH SÁCH ĐỘI BÓNG\n";
-   
-
-    for (let i = 0; i < playerIds.length; i++) {
-        const row = (i + 1) + " "  + playerIds[i] + " " + playerPositions[i];
-        listText += row + "\n";
-        
-        console.log(row);
-    }
-
-    alert(listText);
-}
-
-function findPlayersByPosition(position) {
-    const indices = [];
-    for (let i = 0; i < playerPositions.length; i++) {
-        if (playerPositions[i] === position) {
-            indices.push(i);
-        }
-    }
-    return indices;
-}
-
-
-let playerCount;
+let NeedInput = Number(prompt("có bao nhiêu cầu thủ cần nhập vào đội bóng: "));
 do {
-    const inputValue = prompt("Có bao nhiêu cầu thủ cần nhập vào đội bóng?");
-    if (inputValue === null) {
-        alert("bạn đã hủy chương trình.");
-
+    if (isNaN(NeedInput) || NeedInput < 0){
+        alert("bắt buộc phải là số nguyên dương nhé !");
     }
-    playerCount = Number(inputValue);
-    if (isNaN(playerCount) || playerCount <= 0 ) {
-        alert("nhập số nguyên dương");
-    }
-} while (isNaN(playerCount) || playerCount <= 0 );
+    break;
+} while (isNaN(NeedInput) || NeedInput < 0);
 
-inputPlayers(playerCount);
+let goal = ["thủ môn","hậu vệ","tiền vệ","tiền đạo"];
 
-printTeamRoster();
+for(let i = 1; i <= NeedInput; i++ ){
+    const id = Number(prompt("Nhập mã cầu thủ: "));
 
-const positions = ["Thủ môn", "Hậu vệ", "Tiền vệ", "Tiền đạo"];
+    playerID.push(id);
 
+    let PoiChoice = prompt("Vị trí :\n 1 thủ môn \n 2 hậu vệ \n 3 tiền vệ \n 4 tiền đạo  ! ");
 
-console.log("KẾT QUẢ TÌM KIẾM THEO VỊ TRÍ");
+    let Poi = goal[PoiChoice - 1 ];
 
-for (let j = 0; j < positions.length; j++) {
-    const pos = positions[j];
-    const found = findPlayersByPosition(pos);
+    PoiPlayyer.push(Poi);
 
-    let rowText = pos + ": ";
-    if (found.length === 0) {
-        rowText += "Không có";
-    } else {
-        for (let k = 0; k < found.length; k++) {
-            rowText += playerIds[found[k]] + " ";
-        }
-    }
-    ketQuaTim += rowText ; 
-    
-    console.log(rowText);
+    console.log(`${i} . ${id} - ${Poi}`);
 }
+let result = PoiPlayyer.filter((t) => t === "tiền vệ").length;
+
+console.log(" số vị trí tiền vệ của các cầu thủ là: "+ result +"  ");
+
+
