@@ -34,7 +34,7 @@ for (let i = 0; i < ask; i++) {
     let chosenPosition = positionList[Number(choice)];
 
     if (!chosenPosition) {
-        alert(`Không xác định`);
+        alert(`Không xác định !`);
     }
 
     let playerInfo = `${playerId} - ${playerName} - ${chosenPosition}`;
